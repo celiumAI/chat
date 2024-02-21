@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendMessageButton = document.getElementById('sendMessage');
     const inputText = document.getElementById('inputText');
     const messages = document.getElementById('messages');
+    const userInputDiv = document.getElementById('userInput');
 
     function addMessage(message){
         const messageDiv = document.createElement('div');
@@ -38,8 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    function toggleUserInputFields(disabled) {
+        inputText.disabled = !disabled;
+        sendMessageButton.disabled = !disabled;
+    }
+
     function getResponse(){
-        sendMessageButton.disabled = true; // Disable button while request is in progress
+        toggleUserInputFields(false);
         const messages = getMessages();
         console.log(messages);
 
@@ -63,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error:', error))
         .finally(() => {
-            sendMessageButton.disabled = false; // Re-enable button after request
+            toggleUserInputFields(true);
         });
     }
 
