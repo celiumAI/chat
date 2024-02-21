@@ -1,14 +1,9 @@
 import fastapi
 from typing import List
-import networkx as nx
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 app = fastapi.FastAPI()
-
-# create a graph
-input_graph = nx.Graph()
-annotation_graph = nx.Graph()
 
 LLM_BASE_URL = "http://localhost:11434"
 
