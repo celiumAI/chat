@@ -2,10 +2,13 @@ import fastapi
 from typing import List
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+import os
+
+HOST = os.environ.get("HOST", "localhost")
+PORT = os.environ.get("PORT", 5020)
+LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "http://localhost:11434")
 
 app = fastapi.FastAPI()
-
-LLM_BASE_URL = "http://localhost:11434"
 
 
 class Link(BaseModel):
@@ -83,4 +86,4 @@ def make_chat_completion(
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="localhost", port=5020)
+    uvicorn.run(app, host=HOST, port=PORT)
